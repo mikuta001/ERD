@@ -3,24 +3,24 @@ erDiagram
 
     products {
         int id PK
-        string product_name
+        string name
         int price_excluding_tax
         int price_including_tax
-        int product_category_id FK
+        int category_id FK
         datetime created_at
         datetime updated_at
     }
 
-    product_categories {
+    categories {
         int id PK
-        string product_category_name
+        string name
         datetime created_at
         datetime updated_at
     }
 
     orders {
         int id PK
-        int order_method_id FK
+        int method_id FK
         int customer_id FK
         datetime order_date_time
         int total_amount
@@ -28,7 +28,7 @@ erDiagram
         datetime updated_at
     }
 
-    order_details {
+    details {
         int id PK
         int order_id FK
         int product_id FK
@@ -45,16 +45,16 @@ erDiagram
         datetime updated_at
     }
 
-    order_methods {
+    methods {
         int id PK
-        string order_method_name
+        string name
         datetime created_at
         datetime updated_at
     }
 
-    product_categories ||--o{ products : categorizes
+    categories ||--o{ products : categorizes
     customers ||--o{ orders : places
-    order_methods ||--o{ orders : used_by
-    orders ||--o{ order_details : includes
-    products ||--o{ order_details : references
+    methods ||--o{ orders : used_by
+    orders ||--o{ details : includes
+    products ||--o{ details : references
 ```
