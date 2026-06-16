@@ -8,9 +8,9 @@ erDiagram
     int contact_id FK
     int location_id FK
     datetime requested_at
-    string contact_required
-    string contact_phone_number
-    string title_notification_allowed
+    int contact_required
+    int contact_number
+    int title_notification_allowed
     datetime created_at
     datetime updated_at
   }
