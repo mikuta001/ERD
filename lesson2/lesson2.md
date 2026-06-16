@@ -3,15 +3,14 @@ erDiagram
 
   reservations {
     int id PK
+    int user_id FK
+    int book_id FK
+    int contact_id FK
+    int location_id FK
     datetime requested_at
     string contact_required
     string contact_phone_number
     string title_notification_allowed
-    int user_id FK
-    int book_id FK
-    int contact_method_id FK
-    int location_id FK
-    int discovery_method_id FK
     datetime created_at
     datetime updated_at
   }
@@ -27,9 +26,9 @@ erDiagram
 
   books {
     int id PK
+    int publisher_id FK
     string name
     string author_name
-    int publisher_id FK
     datetime publication_year
     int price
     datetime created_at
@@ -43,9 +42,18 @@ erDiagram
     datetime updated_at
   }
 
-  contact_methods {
+  contacts {
     int id PK
     string name
+    datetime created_at
+    datetime updated_at
+  }
+
+  referrals {
+    int id PK
+    int user_id FK
+    int book_id FK
+    string referrals_methods_name
     datetime created_at
     datetime updated_at
   }
@@ -57,18 +65,11 @@ erDiagram
     datetime updated_at
   }
 
-
-  discovery_methods {
-    int id PK
-    string name
-    datetime created_at
-    datetime updated_at
-  }
-
   users ||--o{ reservations : makes
   books ||--o{ reservations : reserved_by
   publishers ||--o{ books : publishes
-  contact_methods ||--o{ reservations : used_by
+  contacts ||--o{ reservations : used_by
   locations ||--o{ reservations : selected_for
-  discovery_methods ||--o{ reservations : referenced_by
+  users ||--o{ referrals : makes
+  books ||--o{ referrals : referenced_by
 ```
